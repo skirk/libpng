@@ -930,6 +930,10 @@ endif()
 # users can include() to import our targets
 if(PNG_EXPORT_RULE AND NOT SKIP_INSTALL_EXPORT AND NOT SKIP_INSTALL_ALL )
   install(EXPORT libpng DESTINATION lib/libpng FILE lib${PNG_LIB_NAME}.cmake)
+
+  #install Config file for find_package calls in user projects 
+  configure_file(cmake/libpngConfig.cmake.in cmake/lib${PNG_LIB_NAME}Config.cmake @ONLY)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cmake/lib${PNG_LIB_NAME}Config.cmake DESTINATION lib/libpng)
 endif()
 
 # what's with libpng-manual.txt and all the extra files?
